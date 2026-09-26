@@ -1,0 +1,25 @@
+* { box-sizing: border-box; }
+body { font-family: system-ui, sans-serif; background: #f6f4ef; color: #222; margin: 0; }
+main { max-width: 720px; margin: 0 auto; padding: 32px 16px; }
+h1 { margin-top: 0; }
+.stats { display: flex; gap: 12px; margin-bottom: 24px; }
+.stats div { flex: 1; background: #fff; border-radius: 8px; padding: 12px; text-align: center; }
+.stats strong { display: block; font-size: 1.6em; }
+.stats span { color: #777; font-size: .9em; }
+.add { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
+.add input { flex: 1; min-width: 120px; }
+input, button { padding: 8px; border: 1px solid #ccc; border-radius: 6px; font: inherit; }
+button { background: #2f6f4f; color: #fff; border: none; cursor: pointer; }
+button.danger { background: #b04040; }
+.book { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px;
+        background: #fff; border-radius: 8px; padding: 12px 16px; margin-bottom: 10px; }
+.book h3 { margin: 0 0 4px; }
+.book p { margin: 0 0 8px; color: #666; }
+.book.done { opacity: .75; }
+.info { flex: 1; min-width: 200px; }
+.actions { display: flex; gap: 6px; align-items: center; }
+.actions form { display: flex; gap: 4px; }
+.actions input { width: 80px; }
+.bar { height: 8px; background: #e5e5e5; border-radius: 4px; overflow: hidden; }
+.bar div { height: 100%; background: #2f6f4f; }
+.empty { color: #888; font-style: italic; }

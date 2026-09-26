@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Reading Tracker</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <main>
+    <h1>📚 Reading Tracker</h1>
+
+    <section class="stats">
+      <div><strong>{{ stats.total }}</strong><span>books</span></div>
+      <div><strong>{{ stats.finished }}</strong><span>finished</span></div>
+      <div><strong>{{ stats.pages_read }}</strong><span>pages read</span></div>
+    </section>
+
+    <form class="add" action="{{ url_for('add_book') }}" method="post">
+      <input name="title" placeholder="Title" required>
+      <input name="author" placeholder="Author">
+      <input name="pages" type="number" min="1" placeholder="Pages" required>
+      <button type="submit">Add book</button>
+    </form>
+
+    <h2>Currently reading</h2>
+    {% for b in reading %}
+      <div class="book">
+        <div class="info">
+          <h3>{{ b.title }}</h3>
+          <p>{{ b.author }} · {{ b.current }} / {{ b.pages }} pages</p>
+          <div class="bar"><div style="width: {{ b.progress }}%"></div></div>
+        </div>
+        <div class="actions">
+          <form action="{{ url_for('update_progress', book_id=b.id) }}" method="post">
+            <input name="current" type="number" min="0" max="{{ b.pages }}" value="{{ b.current }}">
+            <button>Save</button>
+          </form>
+          <form action="{{ url_for('finish', book_id=b.id) }}" method="post"><button>Finish</button></form>
+          <form action="{{ url_for('delete', book_id=b.id) }}" method="post"><button class="danger">✕</button></form>
+        </div>
+      </div>
+    {% else %}
+      <p class="empty">Nothing on the nightstand. Add a book above.</p>
+    {% endfor %}
+
+    <h2>Finished</h2>
+    {% for b in finished %}
+      <div class="book done">
+        <div class="info">
+          <h3>✔ {{ b.title }}</h3>
+          <p>{{ b.author }} · {{ b.pages }} pages</p>
+        </div>
+        <div class="actions">
+          <form action="{{ url_for('delete', book_id=b.id) }}" method="post"><button class="danger">✕</button></form>
+        </div>
+      </div>
+    {% else %}
+      <p class="empty">No finished books yet.</p>
+    {% endfor %}
+  </main>
+</body>
+</html>
